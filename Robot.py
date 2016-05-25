@@ -20,12 +20,13 @@ class Robot:
         self.images = []
         self.images.append(Sign(PriorityEnum.MoBa, "images/move_backward.png"))
         self.images.append(Sign(PriorityEnum.MoFo, "images/move_forward.png"))
-        self.images.append(Sign(PriorityEnum.StLe, "images/Steer_left.png"))
-        self.images.append(Sign(PriorityEnum.StRi, "images/Steer_right.png"))
+        self.images.append(Sign(PriorityEnum.Stop, "images/stop.png"))
         self.images.append(Sign(PriorityEnum.TuLe, "images/turn_left.png"))
         self.images.append(Sign(PriorityEnum.TuRi, "images/turn_right.png"))
         #img = cv2.imread(self.images[0].url)
-        self.Analyse("images/check.png")
+        foundImages = self.Analyse("images/check.png")
+        #for item in foundImages:
+        #    self.Execute(item)
         # self.Move(EngineDirection.Forward, EngineDirection.Backward, EngineIntensity.Speed1, EngineIntensity.Speed2)
 
     def run(self, test, test2):
@@ -33,18 +34,18 @@ class Robot:
         print("test " + test + test2)
 
     def start(self):
-        var = self.Camera.get()
-        self.ELeft.Move(EngineDirection.Forward, EngineIntensity.Speed9)
-        self.ERight.Move(EngineDirection.Forward, EngineIntensity.Speed9)
+        #var = self.Camera.get()
+        #self.ELeft.Move(EngineDirection.Forward, EngineIntensity.Speed9)
+        #self.ERight.Move(EngineDirection.Forward, EngineIntensity.Speed9)
 
-        t=threading.Thread(target=self.run, args=('bob','bob2',))
+        #t=threading.Thread(target=self.run, args=('bob','bob2',))
         #t.daemon = False  # set thread to daemon ('ok' won't be printed in this case)
-        i = 0
-        t.start()
-        while(i < 6):
-            time.sleep(1)
-            print("This is main")
-            i += 1
+        # i = 0
+        # t.start()
+        # while(i < 6):
+        #     time.sleep(1)
+        #     print("This is main")
+        #     i += 1
         self.Stop()
         return
 
@@ -66,17 +67,18 @@ class Robot:
         self.ERight.Stop()
 
     def Execute(self, i):
-        if(i is SignID.Stop.value):
-            print("STOPPING")
+        if(i is PriorityEnum.TuLe):
+            return
 
     def Analyse(self, camimg):
         retlist = []
         for item in self.images:
-            img = cv2.imread(camimg)
-            template = cv2.imread(item.url)
+            img = cv2.imread(camimg, 0)
+            template = cv2.imread(item.url, 0)
             result = numpy.array([0])
-            result = cv2.matchTemplate(img, template, eval('cv2.TM_CCOEFF_NORMED'))
+            result = cv2.matchTemplate(img, template, eval('cv2.TM_CCOEFF'))
             min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-            print("minval: " + str(min_val) + "; maxval :" + str(max_val) + "; minloc: "+ str(min_loc) + "; maxloc: " + str(max_loc))
+            print(str(min_val) + ";" + str(max_val))
             if(str(max_loc) != "(0, 0)" and str(min_loc) != "(0, 0)"):
                 retlist.append(item.SignID)
+        return (retlist)

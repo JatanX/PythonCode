@@ -12,7 +12,8 @@ class Engine:
     	   serial.STOPBITS_ONE
            )
         except Exception as e:
-            print("Port not found\n")
+            #print("Port not found\n")
+            return
         return
 
     def Move(self, Direction, Intensity):
@@ -25,7 +26,8 @@ class Engine:
         try:
             self.port.write(var + "\n")
         except Exception as e:
-            print("port not found\n")
+            #print("port not found\n")
+            return
 
     def Stop(self):
         send = 0b10100000
@@ -34,4 +36,5 @@ class Engine:
         try:
             self.port.write(var + "\n")
         except Exception as e:
-            print("port not found\n")
+            #print("port not found\n")
+            return
