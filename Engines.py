@@ -33,8 +33,9 @@ class Engine:
         send = 0b10100000
         send = (send | (self.isleft << 6))
         var = chr(send)
+        print("stopping")
         try:
             self.port.write(var + "\n")
         except Exception as e:
-            #print("port not found\n")
+            print("port not found\n")
             return

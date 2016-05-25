@@ -30,8 +30,8 @@ class EngineIntensity(Enum):
     Speed15 = 15
 
 class PriorityEnum(Enum):
-    Stop = 0
-    MoBa = 1
-    MoFo = 2
-    TuLe = 3
-    TuRi = 4
+    Stop = 1
+    MoBa = 2
+    MoFo = 3
+    TuLe = 4
+    TuRi = 5

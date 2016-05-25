@@ -18,22 +18,24 @@ class Robot:
         self.Camera = Camera(0)
         self.Degree = Degree(1)
         self.images = []
-        self.images.append(Sign(PriorityEnum.MoBa, "images/move_backward.png"))
-        self.images.append(Sign(PriorityEnum.MoFo, "images/move_forward.png"))
         self.images.append(Sign(PriorityEnum.Stop, "images/stop.png"))
         self.images.append(Sign(PriorityEnum.TuLe, "images/turn_left.png"))
         self.images.append(Sign(PriorityEnum.TuRi, "images/turn_right.png"))
+        self.images.append(Sign(PriorityEnum.MoBa, "images/move_backward.png"))
+        self.images.append(Sign(PriorityEnum.MoFo, "images/move_forward.png"))
+
         #img = cv2.imread(self.images[0].url)
         foundImages = self.Analyse("images/check3.png")
-        #for item in foundImages:
-        #    self.Execute(item)
-        # self.Move(EngineDirection.Forward, EngineDirection.Backward, EngineIntensity.Speed1, EngineIntensity.Speed2)
+        for item in foundImages:
+            self.Execute(item)
+        self.Move(EngineDirection.Forward, EngineDirection.Backward, EngineIntensity.Speed1, EngineIntensity.Speed2)
 
     def run(self, test, test2):
         time.sleep(2)
         print("test " + test + test2)
 
     def start(self):
+
         #var = self.Camera.get()
         #self.ELeft.Move(EngineDirection.Forward, EngineIntensity.Speed9)
         #self.ERight.Move(EngineDirection.Forward, EngineIntensity.Speed9)
@@ -46,15 +48,8 @@ class Robot:
         #     time.sleep(1)
         #     print("This is main")
         #     i += 1
-        self.Stop()
+        #self.Stop()
         return
-
-
-
-
-
-
-
         #alle code die uitgevoert moet gaan worden
 
     def Move(self, DLeft, DRight, ILeft, IRight):
@@ -67,8 +62,16 @@ class Robot:
         self.ERight.Stop()
 
     def Execute(self, i):
-        if(i is PriorityEnum.TuLe):
-            return
+        if(PriorityEnum.Stop is i):
+            self.Stop()
+        if(PriorityEnum.MoBa is i):
+            print("move back")
+        if(PriorityEnum.MoFo is i):
+            print("move forward")
+        if(PriorityEnum.TuLe is i):
+            print("turn left")
+        if(PriorityEnum.TuRi is i):
+            print("turn right")
 
     def Analyse(self, camimg):
         retlist = []
@@ -78,7 +81,8 @@ class Robot:
             result = numpy.array([0])
             result = cv2.matchTemplate(img, template, eval('cv2.TM_CCOEFF_NORMED'))
             min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-            print(str(min_val) + ";" + str(max_val))
+            #print(str(min_val) + ";" + str(max_val))
             if(max_val > 0.8):
-                print("Found it: " + item.url)
+                retlist.append(item.SignID)
+        retlist.sort()
         return (retlist)
