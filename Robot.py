@@ -24,8 +24,8 @@ class Robot:
         self.images.append(Sign(PriorityEnum.StRi, "images/Steer_right.png"))
         self.images.append(Sign(PriorityEnum.TuLe, "images/turn_left.png"))
         self.images.append(Sign(PriorityEnum.TuRi, "images/turn_right.png"))
-        img = cv2.imread(self.images[0].url)
-        self.Analyse()
+        #img = cv2.imread(self.images[0].url)
+        self.Analyse("images/check.png")
         # self.Move(EngineDirection.Forward, EngineDirection.Backward, EngineIntensity.Speed1, EngineIntensity.Speed2)
 
     def run(self, test, test2):
@@ -69,15 +69,14 @@ class Robot:
         if(i is SignID.Stop.value):
             print("STOPPING")
 
-    def Analyse(self):
+    def Analyse(self, camimg):
         retlist = []
         for item in self.images:
-            img = cv2.imread("images/turn_left.png")
+            img = cv2.imread(camimg)
             template = cv2.imread(item.url)
             result = numpy.array([0])
             result = cv2.matchTemplate(img, template, eval('cv2.TM_CCOEFF_NORMED'))
             min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-            print("Result is " + str(max_loc))
+            print("minval: " + str(min_val) + "; maxval :" + str(max_val) + "; minloc: "+ str(min_loc) + "; maxloc: " + str(max_loc))
             if(str(max_loc) != "(0, 0)" and str(min_loc) != "(0, 0)"):
-                print("Found it")
-                print(item.url)
+                retlist.append(item.SignID)
