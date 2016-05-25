@@ -1,0 +1,6 @@
+De volgende commmando's worden gebruikt:
+
+sudo apt-get install python-opencv
+pip install pyserial
+
+
