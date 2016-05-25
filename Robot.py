@@ -24,24 +24,26 @@ class Robot:
         self.images.append(Sign(PriorityEnum.TuLe, "images/turn_left.png"))
         self.images.append(Sign(PriorityEnum.TuRi, "images/turn_right.png"))
         img = cv2.imread(self.images[0].url)
+        self.Analyse()
         # self.Move(EngineDirection.Forward, EngineDirection.Backward, EngineIntensity.Speed1, EngineIntensity.Speed2)
 
-    def run(self):
+    def run(self, test, test2):
         time.sleep(2)
-        print("Thread says Hi")
+        print("test " + test + test2)
 
     def start(self):
         var = self.Camera.get()
         self.ELeft.Move(EngineDirection.Forward, EngineIntensity.Speed9)
         self.ERight.Move(EngineDirection.Forward, EngineIntensity.Speed9)
-        self.Analyse("item")
 
-        t=threading.Thread(target=self.run)
+        t=threading.Thread(target=self.run, args=('bob','bob2',))
         #t.daemon = False  # set thread to daemon ('ok' won't be printed in this case)
+        i = 0
         t.start()
-        while(True):
+        while(i < 6):
             time.sleep(1)
             print("This is main")
+            i += 1
         self.Stop()
         return
 
@@ -66,7 +68,8 @@ class Robot:
         if(i is SignID.Stop.value):
             print("STOPPING")
 
-    def Analyse(self, image):
-        for item in self.images:
-            print(item.url)
-        print("Scanning")
+    def Analyse(self):
+        img_rgb = cv2.imread('turn_left.png')
+        img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
+        template = cv2.imread('template.png',0)
+        res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)

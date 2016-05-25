@@ -1,5 +1,5 @@
 import os
-#import cv2
+import cv2
 import numpy
 
 class Sensor:
@@ -7,12 +7,10 @@ class Sensor:
         return
     def get(self):
         print("This function is abstract")
-        return
 
 class Degree(Sensor):
     def __init__(self, id):
         self.id = id
-        return
 
     def get(self):
         return 90
@@ -20,7 +18,6 @@ class Degree(Sensor):
 class Camera(Sensor):
     def __init__(self, id):
         self.id = id
-        return
 
     def get(self):
         try:
