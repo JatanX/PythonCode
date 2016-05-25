@@ -7,6 +7,7 @@ from Sensors import *
 from Sign import *
 import threading
 import time
+import numpy
 
 class Robot:
     def __init__(self, name, error):
@@ -69,7 +70,14 @@ class Robot:
             print("STOPPING")
 
     def Analyse(self):
-        img_rgb = cv2.imread('turn_left.png')
-        img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
-        template = cv2.imread('template.png',0)
-        res = cv2.matchTemplate(img_gray,template,cv2.TM_CCOEFF_NORMED)
+        retlist = []
+        for item in self.images:
+            img = cv2.imread("images/turn_left.png")
+            template = cv2.imread(item.url)
+            result = numpy.array([0])
+            result = cv2.matchTemplate(img, template, eval('cv2.TM_CCOEFF_NORMED'))
+            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+            print("Result is " + str(max_loc))
+            if(str(max_loc) != "(0, 0)" and str(min_loc) != "(0, 0)"):
+                print("Found it")
+                print(item.url)
