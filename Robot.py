@@ -24,7 +24,7 @@ class Robot:
         self.images.append(Sign(PriorityEnum.TuLe, "images/turn_left.png"))
         self.images.append(Sign(PriorityEnum.TuRi, "images/turn_right.png"))
         #img = cv2.imread(self.images[0].url)
-        foundImages = self.Analyse("images/check.png")
+        foundImages = self.Analyse("images/check3.png")
         #for item in foundImages:
         #    self.Execute(item)
         # self.Move(EngineDirection.Forward, EngineDirection.Backward, EngineIntensity.Speed1, EngineIntensity.Speed2)
@@ -76,9 +76,9 @@ class Robot:
             img = cv2.imread(camimg, 0)
             template = cv2.imread(item.url, 0)
             result = numpy.array([0])
-            result = cv2.matchTemplate(img, template, eval('cv2.TM_CCOEFF'))
+            result = cv2.matchTemplate(img, template, eval('cv2.TM_CCOEFF_NORMED'))
             min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
             print(str(min_val) + ";" + str(max_val))
-            if(str(max_loc) != "(0, 0)" and str(min_loc) != "(0, 0)"):
-                retlist.append(item.SignID)
+            if(max_val > 0.8):
+                print("Found it: " + item.url)
         return (retlist)
