@@ -5,9 +5,13 @@ from Enums import *
 from Engines import *
 from Sensors import *
 from Sign import *
-import threading
+from threading import *
+from Queue import Queue
 import time
-import numpy
+import numpy as np
+import Image
+import pytesseract
+import commands
 
 class Robot:
     def __init__(self, name, error):
@@ -18,71 +22,156 @@ class Robot:
         self.Camera = Camera(0)
         self.Degree = Degree(1)
         self.images = []
-        self.images.append(Sign(PriorityEnum.Stop, "images/stop.png"))
-        self.images.append(Sign(PriorityEnum.TuLe, "images/turn_left.png"))
-        self.images.append(Sign(PriorityEnum.TuRi, "images/turn_right.png"))
-        self.images.append(Sign(PriorityEnum.MoBa, "images/move_backward.png"))
-        self.images.append(Sign(PriorityEnum.MoFo, "images/move_forward.png"))
-
-        #img = cv2.imread(self.images[0].url)
-        foundImages = self.Analyse("images/check3.png")
-        for item in foundImages:
-            self.Execute(item)
-        self.Move(EngineDirection.Forward, EngineDirection.Backward, EngineIntensity.Speed1, EngineIntensity.Speed2)
-
-    def run(self, test, test2):
-        time.sleep(2)
-        print("test " + test + test2)
+        self.lock = Lock()
+        self.q = Queue()
+        self.images.append(Sign(PriorityEnum.Exit, "Exit"))
+        self.images.append(Sign(PriorityEnum.Stop, "Stop"))
+        self.images.append(Sign(PriorityEnum.Left, "Left"))
+        self.images.append(Sign(PriorityEnum.Right, "Right"))
+        self.images.append(Sign(PriorityEnum.Backward, "Backward"))
+        self.images.append(Sign(PriorityEnum.Forward, "Forward"))
 
     def start(self):
-
-        #var = self.Camera.get()
-        #self.ELeft.Move(EngineDirection.Forward, EngineIntensity.Speed9)
-        #self.ERight.Move(EngineDirection.Forward, EngineIntensity.Speed9)
-
-        #t=threading.Thread(target=self.run, args=('bob','bob2',))
-        #t.daemon = False  # set thread to daemon ('ok' won't be printed in this case)
-        # i = 0
-        # t.start()
-        # while(i < 6):
-        #     time.sleep(1)
-        #     print("This is main")
-        #     i += 1
-        #self.Stop()
+        while(True):
+            #self.Camera.get()
+            self.foundImages = self.Analyse()
+            if not self.foundImages:
+                pass
+            else:
+                for item in self.foundImages:
+                    self.Execute(item)
         return
-        #alle code die uitgevoert moet gaan worden
 
-    def Move(self, DLeft, DRight, ILeft, IRight):
+    def Move(self, DLeft, DRight, ILeft, IRight, Duration):
         self.ELeft.Move(DLeft, ILeft)
         self.ERight.Move(DRight, IRight)
+        i = Duration
+        while(i > 0):
+            try:
+                status = self.q.get()
+                print("status is: " + status)
+            except:
+                print("still going")
+                pass
+            if status == "stop":
+                break
+            time.sleep(0.1)
+            i -= 1
         return
 
     def Stop(self):
         self.ELeft.Stop()
         self.ERight.Stop()
+        self.MakeAllThreadsExit()
+        print("Stopping")
+
+    def Exit(self):
+        self.Stop()
+        print("Exiting Program")
+        sys.exit()
+        #kan raar doen als aangeroepen in een thread
+        #moet nog onderzocht worden
 
     def Execute(self, i):
-        if(PriorityEnum.Stop is i):
+        if(PriorityEnum.Exit == i):
+            self.Exit()
+        if(PriorityEnum.Stop == i):
             self.Stop()
-        if(PriorityEnum.MoBa is i):
+        if(PriorityEnum.Backward == i):
+            self.MoveDirection(EngineDirection.Backward, EngineIntensity.Speed6)
             print("move back")
-        if(PriorityEnum.MoFo is i):
+        if(PriorityEnum.Forward == i):
+            self.MoveDirection(EngineDirection.Forward, EngineIntensity.Speed6)
             print("move forward")
-        if(PriorityEnum.TuLe is i):
+        if(PriorityEnum.Left == i):
             print("turn left")
-        if(PriorityEnum.TuRi is i):
+            self.MakeTurn(EngineDirection.Backward, EngineDirection.Forward, EngineIntensity.Speed15, EngineIntensity.Speed15, -90)
+        if(PriorityEnum.Right == i):
             print("turn right")
+            self.MakeTurn(EngineDirection.Forward, EngineDirection.Backward, EngineIntensity.Speed15, EngineIntensity.Speed15, 90)
+        self.Stop()
+    
 
-    def Analyse(self, camimg):
+    def MoveDirection(self, Dir, Int):
+        threadSign = Thread( target = self.StopExitCheck)
+        threadSign.daemon = False
+        threadSign.start()
+        self.Move(Dir, Dir, Int, Int, 50)
+        threadSign.join()
+
+    def MakeTurn(self, DirLeft, DirRight, IntLeft, IntRight, AngleToCompare):
+        threadgyro = Thread( target = self.turnTill, args=( AngleToCompare,))
+        threadgyro.daemon = False
+        self.Degree.power_on()
+        threadgyro.start()
+        self.Move(DirLeft, DirRight, IntLeft, IntRight, 50)
+        threadgyro.join()
+        self.Degree.power_off()
+
+    def turnTill(self, compareval):
+        count = 0
+        degrees = 0
+        t0  = time.clock()
+        output = 0
+        compareval = (compareval * 0.5)
+        print("Zit in thread")
+        while(True):
+            time.sleep(0.1)
+            temp = self.Degree.get()
+            temp = temp * 0.1
+            output += temp
+            if (compareval > 0 and output >= compareval) or (compareval < 0 and output <= compareval):
+                print("stopping now")
+                self.Stop()
+                self.MakeAllThreadsExit()
+                return
+            if self.q.empty:
+                pass
+            else:
+                status = self.q.get()
+                if status == "stop":
+                    return
+
+    def StopExitCheck(self):
+        while(True):
+            if self.q.empty:
+                pass
+            else:
+                status = self.q.get()
+                if status == "stop":
+                    return
+            list = self.Analyse()
+            for item in list:
+                if item == PriorityEnum.Stop:
+                    self.Stop()
+                    self.foundImages = None
+                    return
+                if item == PriorityEnum.Exit:
+                    self.MakeAllThreadsExit()
+                    self.Exit()
+
+    def MakeAllThreadsExit(self):
+        i = activeCount()
+        while(i >= 0):
+            self.q.put("stop")
+            i -= 1
+
+    def Analyse(self):
         retlist = []
+        self.lock.acquire()
+        self.Camera.get()
+        gray = cv2.imread('images/capture.png',0)
+        self.lock.release()
+
+        ret,thresh = cv2.threshold(gray, 100 ,240, 0)
+        cv2.imwrite("ThreshImage.png", thresh)
+        print("Done taking pictures, scanning for text now")
+        sentence = pytesseract.image_to_string(Image.open('ThreshImage.png'))
+        print(sentence)
         for item in self.images:
-            img = cv2.imread(camimg, 0)
-            template = cv2.imread(item.url, 0)
-            result = numpy.array([0])
-            result = cv2.matchTemplate(img, template, eval('cv2.TM_CCOEFF_NORMED'))
-            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-            #print(str(min_val) + ";" + str(max_val))
-            if(max_val > 0.8):
+            if item.Text in sentence:
+                print("yes")
                 retlist.append(item.SignID)
+        retlist.append(0)
         retlist.sort()
-        return (retlist)
+        return retlist

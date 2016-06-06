@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{237c7194-6302-4391-8b16-0bf29733fb15}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>Engines.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+    <InterpreterVersion />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".git\desktop.ini" />
+    <Content Include=".git\hooks\desktop.ini" />
+    <Content Include=".git\info\desktop.ini" />
+    <Content Include=".git\logs\desktop.ini" />
+    <Content Include=".git\logs\refs\desktop.ini" />
+    <Content Include=".git\logs\refs\heads\desktop.ini" />
+    <Content Include=".git\logs\refs\remotes\desktop.ini" />
+    <Content Include=".git\logs\refs\remotes\origin\desktop.ini" />
+    <Content Include=".git\objects\00\desktop.ini" />
+    <Content Include=".git\objects\08\desktop.ini" />
+    <Content Include=".git\objects\09\desktop.ini" />
+    <Content Include=".git\objects\0a\desktop.ini" />
+    <Content Include=".git\objects\0b\desktop.ini" />
+    <Content Include=".git\objects\0d\desktop.ini" />
+    <Content Include=".git\objects\14\desktop.ini" />
+    <Content Include=".git\objects\16\desktop.ini" />
+    <Content Include=".git\objects\17\desktop.ini" />
+    <Content Include=".git\objects\1b\desktop.ini" />
+    <Content Include=".git\objects\1c\desktop.ini" />
+    <Content Include=".git\objects\1d\desktop.ini" />
+    <Content Include=".git\objects\1f\desktop.ini" />
+    <Content Include=".git\objects\20\desktop.ini" />
+    <Content Include=".git\objects\23\desktop.ini" />
+    <Content Include=".git\objects\28\desktop.ini" />
+    <Content Include=".git\objects\2c\desktop.ini" />
+    <Content Include=".git\objects\2d\desktop.ini" />
+    <Content Include=".git\objects\30\desktop.ini" />
+    <Content Include=".git\objects\35\desktop.ini" />
+    <Content Include=".git\objects\37\desktop.ini" />
+    <Content Include=".git\objects\3f\desktop.ini" />
+    <Content Include=".git\objects\40\desktop.ini" />
+    <Content Include=".git\objects\43\desktop.ini" />
+    <Content Include=".git\objects\44\desktop.ini" />
+    <Content Include=".git\objects\49\desktop.ini" />
+    <Content Include=".git\objects\4a\desktop.ini" />
+    <Content Include=".git\objects\4c\desktop.ini" />
+    <Content Include=".git\objects\4d\desktop.ini" />
+    <Content Include=".git\objects\52\desktop.ini" />
+    <Content Include=".git\objects\53\desktop.ini" />
+    <Content Include=".git\objects\55\desktop.ini" />
+    <Content Include=".git\objects\59\desktop.ini" />
+    <Content Include=".git\objects\5b\desktop.ini" />
+    <Content Include=".git\objects\5f\desktop.ini" />
+    <Content Include=".git\objects\60\desktop.ini" />
+    <Content Include=".git\objects\65\desktop.ini" />
+    <Content Include=".git\objects\6b\desktop.ini" />
+    <Content Include=".git\objects\6c\desktop.ini" />
+    <Content Include=".git\objects\70\desktop.ini" />
+    <Content Include=".git\objects\74\desktop.ini" />
+    <Content Include=".git\objects\75\desktop.ini" />
+    <Content Include=".git\objects\78\desktop.ini" />
+    <Content Include=".git\objects\7c\desktop.ini" />
+    <Content Include=".git\objects\83\desktop.ini" />
+    <Content Include=".git\objects\84\desktop.ini" />
+    <Content Include=".git\objects\88\desktop.ini" />
+    <Content Include=".git\objects\89\desktop.ini" />
+    <Content Include=".git\objects\8c\desktop.ini" />
+    <Content Include=".git\objects\8f\desktop.ini" />
+    <Content Include=".git\objects\90\desktop.ini" />
+    <Content Include=".git\objects\92\desktop.ini" />
+    <Content Include=".git\objects\97\desktop.ini" />
+    <Content Include=".git\objects\99\desktop.ini" />
+    <Content Include=".git\objects\9d\desktop.ini" />
+    <Content Include=".git\objects\9f\desktop.ini" />
+    <Content Include=".git\objects\a3\desktop.ini" />
+    <Content Include=".git\objects\a4\desktop.ini" />
+    <Content Include=".git\objects\a6\desktop.ini" />
+    <Content Include=".git\objects\a7\desktop.ini" />
+    <Content Include=".git\objects\a9\desktop.ini" />
+    <Content Include=".git\objects\aa\desktop.ini" />
+    <Content Include=".git\objects\b1\desktop.ini" />
+    <Content Include=".git\objects\b2\desktop.ini" />
+    <Content Include=".git\objects\b4\desktop.ini" />
+    <Content Include=".git\objects\b5\desktop.ini" />
+    <Content Include=".git\objects\bf\desktop.ini" />
+    <Content Include=".git\objects\c8\desktop.ini" />
+    <Content Include=".git\objects\c9\desktop.ini" />
+    <Content Include=".git\objects\ca\desktop.ini" />
+    <Content Include=".git\objects\ce\desktop.ini" />
+    <Content Include=".git\objects\d5\desktop.ini" />
+    <Content Include=".git\objects\d7\desktop.ini" />
+    <Content Include=".git\objects\d9\desktop.ini" />
+    <Content Include=".git\objects\db\desktop.ini" />
+    <Content Include=".git\objects\dc\desktop.ini" />
+    <Content Include=".git\objects\desktop.ini" />
+    <Content Include=".git\objects\de\desktop.ini" />
+    <Content Include=".git\objects\e1\desktop.ini" />
+    <Content Include=".git\objects\e4\desktop.ini" />
+    <Content Include=".git\objects\e9\desktop.ini" />
+    <Content Include=".git\objects\ec\desktop.ini" />
+    <Content Include=".git\objects\ee\desktop.ini" />
+    <Content Include=".git\objects\f1\desktop.ini" />
+    <Content Include=".git\objects\f4\desktop.ini" />
+    <Content Include=".git\objects\f6\desktop.ini" />
+    <Content Include=".git\objects\f8\desktop.ini" />
+    <Content Include=".git\objects\fc\desktop.ini" />
+    <Content Include=".git\objects\fe\desktop.ini" />
+    <Content Include=".git\objects\info\desktop.ini" />
+    <Content Include=".git\objects\pack\desktop.ini" />
+    <Content Include=".git\refs\desktop.ini" />
+    <Content Include=".git\refs\heads\desktop.ini" />
+    <Content Include=".git\refs\remotes\desktop.ini" />
+    <Content Include=".git\refs\remotes\origin\desktop.ini" />
+    <Content Include=".git\refs\tags\desktop.ini" />
+    <Content Include="data.txt" />
+    <Content Include="desktop.ini" />
+    <Content Include="horn.png" />
+    <Content Include="images\desktop.ini" />
+    <Content Include="images\goup.png" />
+    <Content Include="images\left.png" />
+    <Content Include="images\out.txt.txt" />
+    <Content Include="images\pic0.png" />
+    <Content Include="images\pic01.png" />
+    <Content Include="images\pic1.png" />
+    <Content Include="images\pic2.png" />
+    <Content Include="images\pic3.png" />
+    <Content Include="images\pic4.png" />
+    <Content Include="images\pic5.png" />
+    <Content Include="images\pic6.png" />
+    <Content Include="images\qrcode.png" />
+    <Content Include="images\r.png" />
+    <Content Include="images\right.png" />
+    <Content Include="images\shapes.png" />
+    <Content Include="images\stop.png" />
+    <Content Include="images\stopnow.png" />
+    <Content Include="images\tekst1.png" />
+    <Content Include="images\tekst2.png" />
+    <Content Include="images\temp1.png" />
+    <Content Include="install.txt" />
+    <Content Include="out.txt" />
+    <Content Include="temp.bmp" />
+    <Content Include="temp\desktop.ini" />
+    <Content Include="test.png" />
+    <Content Include="test3.png" />
+    <Content Include="__pycache__\desktop.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Engines.py" />
+    <Compile Include="Enums.py" />
+    <Compile Include="GyroTest.py" />
+    <Compile Include="Main.py" />
+    <Compile Include="motorcontrol.py" />
+    <Compile Include="OpenCVTest.py" />
+    <Compile Include="Robot.py" />
+    <Compile Include="Sensors.py" />
+    <Compile Include="Sign.py" />
+    <Compile Include="temp.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".git" />
+    <Folder Include=".git\hooks" />
+    <Folder Include=".git\info" />
+    <Folder Include=".git\logs" />
+    <Folder Include=".git\logs\refs" />
+    <Folder Include=".git\logs\refs\heads" />
+    <Folder Include=".git\logs\refs\remotes" />
+    <Folder Include=".git\logs\refs\remotes\origin" />
+    <Folder Include=".git\objects" />
+    <Folder Include=".git\objects\00" />
+    <Folder Include=".git\objects\08" />
+    <Folder Include=".git\objects\09" />
+    <Folder Include=".git\objects\0a" />
+    <Folder Include=".git\objects\0b" />
+    <Folder Include=".git\objects\0d" />
+    <Folder Include=".git\objects\14" />
+    <Folder Include=".git\objects\16" />
+    <Folder Include=".git\objects\17" />
+    <Folder Include=".git\objects\1b" />
+    <Folder Include=".git\objects\1c" />
+    <Folder Include=".git\objects\1d" />
+    <Folder Include=".git\objects\1f" />
+    <Folder Include=".git\objects\20" />
+    <Folder Include=".git\objects\23" />
+    <Folder Include=".git\objects\28" />
+    <Folder Include=".git\objects\2c" />
+    <Folder Include=".git\objects\2d" />
+    <Folder Include=".git\objects\30" />
+    <Folder Include=".git\objects\35" />
+    <Folder Include=".git\objects\37" />
+    <Folder Include=".git\objects\3f" />
+    <Folder Include=".git\objects\40" />
+    <Folder Include=".git\objects\43" />
+    <Folder Include=".git\objects\44" />
+    <Folder Include=".git\objects\49" />
+    <Folder Include=".git\objects\4a" />
+    <Folder Include=".git\objects\4c" />
+    <Folder Include=".git\objects\4d" />
+    <Folder Include=".git\objects\52" />
+    <Folder Include=".git\objects\53" />
+    <Folder Include=".git\objects\55" />
+    <Folder Include=".git\objects\59" />
+    <Folder Include=".git\objects\5b" />
+    <Folder Include=".git\objects\5f" />
+    <Folder Include=".git\objects\60" />
+    <Folder Include=".git\objects\65" />
+    <Folder Include=".git\objects\6b" />
+    <Folder Include=".git\objects\6c" />
+    <Folder Include=".git\objects\70" />
+    <Folder Include=".git\objects\74" />
+    <Folder Include=".git\objects\75" />
+    <Folder Include=".git\objects\78" />
+    <Folder Include=".git\objects\7c" />
+    <Folder Include=".git\objects\83" />
+    <Folder Include=".git\objects\84" />
+    <Folder Include=".git\objects\88" />
+    <Folder Include=".git\objects\89" />
+    <Folder Include=".git\objects\8c" />
+    <Folder Include=".git\objects\8f" />
+    <Folder Include=".git\objects\90" />
+    <Folder Include=".git\objects\92" />
+    <Folder Include=".git\objects\97" />
+    <Folder Include=".git\objects\99" />
+    <Folder Include=".git\objects\9d" />
+    <Folder Include=".git\objects\9f" />
+    <Folder Include=".git\objects\a3" />
+    <Folder Include=".git\objects\a4" />
+    <Folder Include=".git\objects\a6" />
+    <Folder Include=".git\objects\a7" />
+    <Folder Include=".git\objects\a9" />
+    <Folder Include=".git\objects\aa" />
+    <Folder Include=".git\objects\b1" />
+    <Folder Include=".git\objects\b2" />
+    <Folder Include=".git\objects\b4" />
+    <Folder Include=".git\objects\b5" />
+    <Folder Include=".git\objects\bf" />
+    <Folder Include=".git\objects\c8" />
+    <Folder Include=".git\objects\c9" />
+    <Folder Include=".git\objects\ca" />
+    <Folder Include=".git\objects\ce" />
+    <Folder Include=".git\objects\d5" />
+    <Folder Include=".git\objects\d7" />
+    <Folder Include=".git\objects\d9" />
+    <Folder Include=".git\objects\db" />
+    <Folder Include=".git\objects\dc" />
+    <Folder Include=".git\objects\de" />
+    <Folder Include=".git\objects\e1" />
+    <Folder Include=".git\objects\e4" />
+    <Folder Include=".git\objects\e9" />
+    <Folder Include=".git\objects\ec" />
+    <Folder Include=".git\objects\ee" />
+    <Folder Include=".git\objects\f1" />
+    <Folder Include=".git\objects\f4" />
+    <Folder Include=".git\objects\f6" />
+    <Folder Include=".git\objects\f8" />
+    <Folder Include=".git\objects\fc" />
+    <Folder Include=".git\objects\fe" />
+    <Folder Include=".git\objects\info" />
+    <Folder Include=".git\objects\pack" />
+    <Folder Include=".git\refs" />
+    <Folder Include=".git\refs\heads" />
+    <Folder Include=".git\refs\remotes" />
+    <Folder Include=".git\refs\remotes\origin" />
+    <Folder Include=".git\refs\tags" />
+    <Folder Include="images" />
+    <Folder Include="temp" />
+    <Folder Include="__pycache__" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>

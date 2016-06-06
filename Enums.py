@@ -1,4 +1,5 @@
 from enum import Enum
+
 class SignID(Enum):
     Stop = 0
     Forward = 1
@@ -7,9 +8,9 @@ class SignID(Enum):
     Wait = 4
 
 class EngineDirection(Enum):
-    Stop = 0
+    Backward = 0
     Forward = 1
-    Backward = 2
+
 
 class EngineIntensity(Enum):
     Speed0 = 0
@@ -30,8 +31,10 @@ class EngineIntensity(Enum):
     Speed15 = 15
 
 class PriorityEnum(Enum):
-    Stop = 1
-    MoBa = 2
-    MoFo = 3
-    TuLe = 4
-    TuRi = 5
+    Exit        = 1
+    Stop        = 2
+    Backward    = 3
+    Forward     = 4
+    Left        = 5
+    Right       = 6
+

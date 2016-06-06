@@ -1,7 +1,7 @@
 from Enums import *
 
 class Sign:
-    def __init__(self, SignID, url):
+    def __init__(self, SignID, Text):
         self.SignID = SignID
-        self.url = url
+        self.Text = Text
         #print(self.SignID)

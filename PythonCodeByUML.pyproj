@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{38017521-e2ef-4750-8bf7-6b791197e38e}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>Engines.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+    <InterpreterVersion />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".git\desktop.ini" />
+    <Content Include=".vs\desktop.ini" />
+    <Content Include="desktop.ini" />
+    <Content Include="images\desktop.ini" />
+    <Content Include="images\goup.png" />
+    <Content Include="images\left.png" />
+    <Content Include="images\out.txt.txt" />
+    <Content Include="images\pic0.png" />
+    <Content Include="images\pic01.png" />
+    <Content Include="images\pic1.png" />
+    <Content Include="images\pic2.png" />
+    <Content Include="images\pic3.png.jpg" />
+    <Content Include="images\pic4.png.jpg" />
+    <Content Include="images\pic5.png.jpg" />
+    <Content Include="images\pic6.png.jpg" />
+    <Content Include="images\qrcode.png" />
+    <Content Include="images\r.png" />
+    <Content Include="images\right.png" />
+    <Content Include="images\shapes.png" />
+    <Content Include="images\stop.png" />
+    <Content Include="images\stopnow.png" />
+    <Content Include="images\tekst1.png.jpg" />
+    <Content Include="images\tekst2.png" />
+    <Content Include="images\temp1.png" />
+    <Content Include="install.txt" />
+    <Content Include="out.txt" />
+    <Content Include="PythonCode.pyproj.txt" />
+    <Content Include="PythonCode.sln.txt" />
+    <Content Include="test.png" />
+    <Content Include="test3.png" />
+    <Content Include="__pycache__\desktop.ini" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Engines.py" />
+    <Compile Include="Enums.py" />
+    <Compile Include="Main.py" />
+    <Compile Include="Robot.py" />
+    <Compile Include="Sensors.py" />
+    <Compile Include="Sign.py" />
+    <Compile Include="temp.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".git" />
+    <Folder Include=".vs" />
+    <Folder Include="images" />
+    <Folder Include="__pycache__" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>
